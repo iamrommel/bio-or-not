@@ -8,7 +8,7 @@ export function setupSerialPort(path?: string) {
     baudRate: 9600,
   })
 
-  console.log('Serial port ready.', result)
+  console.log('Serial port ready.')
 
   return result
 }

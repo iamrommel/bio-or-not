@@ -96,3 +96,8 @@ tools/template-generator/packages/*
 .nx/cache
 .nx/workspace-data
 **/api/uploads/
+/src/webcam_image.jpg
+/src/current.png
+/src/previous.png
+/current.png
+/previous.png
