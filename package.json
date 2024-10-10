@@ -5,15 +5,26 @@
   "repository": "https://github.com/iamrommel/bio-or-not.git",
   "author": "Rommel Manalo <manalo.rommel@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "ts-node src/main.ts",
+    "lint": "eslint . --ext .ts"
+  },
   "devDependencies": {
+    "@eslint/js": "^9.12.0",
     "@types/node-webcam": "^0.8.3",
     "@typescript-eslint/eslint-plugin": "^8.8.1",
     "@typescript-eslint/parser": "^8.8.1",
     "eslint": "^9.12.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.11.0",
+    "prettier": "^3.3.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.8.1"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^4.21.0",
     "@tensorflow/tfjs-node": "^4.21.0",
     "canvas": "^2.11.2",
     "node-webcam": "^0.8.2",

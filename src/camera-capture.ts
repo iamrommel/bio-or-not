@@ -1,9 +1,10 @@
 // Configure webcam settings
-import Webcam from "node-webcam";
-import path from "path";
-import fs from 'fs';
+import Webcam from 'node-webcam'
+import path from 'path'
+import fs from 'fs'
 
-const webcamOpts:  Webcam.WebcamOptions = {
+export function setupCamera() {
+  const webcamOpts: Webcam.WebcamOptions = {
     width: 3000,
     height: 2000,
     quality: 100,
@@ -25,25 +26,23 @@ const webcamOpts:  Webcam.WebcamOptions = {
     //Currently only on windows
 
     delay: 0,
+  }
 
-};
+  // Create a webcam instance
+  return Webcam.create(webcamOpts)
+}
 
-// Create a webcam instance
-const WebcamInstance = Webcam.create(webcamOpts);
-
+const WebcamInstance = setupCamera()
 // Capture an image and analyze it
-export const capture = async (): Promise<{ imagePath: string, data: string | Buffer, image: Buffer }> => {
-    return new Promise((resolve, reject) => {
-        WebcamInstance.capture('./src/webcam_image.jpg', async (err, data) => {
-            if (err) {
-                console.error('Error capturing image:', err);
-                return reject({ error: 'Error capturing image' });
-            }
-            const imagePath = path.join(__dirname, 'webcam_image.jpg');
-            resolve({imagePath, data,  image:  fs.readFileSync(imagePath)})
-
-        });
-    });
-};
-
-
+export const captureFromCamera = async (): Promise<{ imagePath: string; data: string | Buffer; image: Buffer }> => {
+  return new Promise((resolve, reject) => {
+    WebcamInstance.capture('./src/webcam_image.jpg', async (err, data) => {
+      if (err) {
+        console.error('Error capturing image:', err)
+        return reject({ error: 'Error capturing image' })
+      }
+      const imagePath = path.join(__dirname, 'webcam_image.jpg')
+      resolve({ imagePath, data, image: fs.readFileSync(imagePath) })
+    })
+  })
+}
