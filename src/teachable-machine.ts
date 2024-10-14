@@ -14,19 +14,23 @@ export class TeachableMachine {
     }
   }
 
-  async initialize() {
-    this.logger = new Logger()
-    this.logger.logSource = 'Teachable Machine'
+  async initializeWhenNoReady() {
+    if (!this.logger) {
+      this.logger = new Logger()
+      this.logger.logSource = 'Teachable Machine'
+    }
 
-    const modelURL = `${this.config.tmModelUrl}model.json`
+    if (!this.model) {
+      this.logger.log('Start loading AI model.')
 
-    this.logger.log('Star loading AI model.')
-    this.model = await tf.loadLayersModel(modelURL) // Load the graph model
-    this.logger.log('AI model is ready.')
+      const modelURL = `${this.config.tmModelUrl}model.json`
+      this.model = await tf.loadLayersModel(modelURL) // Load the graph model
+      this.logger.log('AI model is ready.')
+    }
   }
 
   async predictImage(imagePath: string) {
-    if (!this.model) await this.initialize()
+    await this.initializeWhenNoReady()
 
     const imageData = fs.readFileSync(imagePath)
     const imageTensor = tf.node.decodeImage(imageData)

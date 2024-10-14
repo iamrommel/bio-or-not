@@ -14,21 +14,23 @@ export class Arduino {
     }
   }
 
-  initialize() {
-    this.logger = new Logger()
-    this.logger.logSource = 'Serial Port'
+  initializeWhenNotReady() {
+    if (!this.logger) {
+      this.logger = new Logger()
+      this.logger.logSource = 'Serial Port'
+    }
 
-    this.logger.log('Staring the serial port.')
+    if (!this.serialPort) {
+      this.logger.log('Staring the serial port.')
 
-    this.serialPort = new SerialPort(this.config)
-
-    this.logger.log('Serial port ready.')
+      this.serialPort = new SerialPort(this.config)
+      this.logger.log('Serial port ready.')
+    }
   }
 
   sendCommand(command: 'L' | 'R') {
-    if (!this.serialPort) {
-      this.initialize()
-    }
+    this.initializeWhenNotReady()
+
     this.serialPort.write(command)
   }
 }

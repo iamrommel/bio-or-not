@@ -35,15 +35,17 @@ export class Camera {
     }
   }
 
-  initialize() {
-    this.logger = new Logger()
-    this.logger.logSource = 'Camera'
+  initializeWhenNotReady() {
+    if (!this.logger) {
+      this.logger = new Logger()
+      this.logger.logSource = 'Camera'
+    }
 
-    this.logger.log('Staring up the camera.')
-
-    this.camera = Webcam.create(this.config)
-
-    this.logger.log('Camera is ready.')
+    if (!this.camera) {
+      this.logger.log('Staring up the camera.')
+      this.camera = Webcam.create(this.config)
+      this.logger.log('Camera is ready.')
+    }
   }
 
   getAllCameras() {
@@ -54,6 +56,8 @@ export class Camera {
   }
 
   async capture(fileName?: string): Promise<{ imagePath: string; data: string | Buffer }> {
+    this.initializeWhenNotReady()
+
     const imagePath = fileName ?? 'webcam_image.png'
 
     return new Promise((resolve, reject) => {
