@@ -42,7 +42,7 @@ export class Camera {
     }
 
     if (!this.camera) {
-      this.logger.log('Staring up the camera.')
+      this.logger.log('Staring up the camera.', this.config)
       this.camera = Webcam.create(this.config)
       this.logger.log('Camera is ready.')
     }

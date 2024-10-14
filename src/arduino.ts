@@ -21,7 +21,7 @@ export class Arduino {
     }
 
     if (!this.serialPort) {
-      this.logger.log('Staring the serial port.')
+      this.logger.log('Staring the serial port.', this.config)
 
       this.serialPort = new SerialPort(this.config)
       this.logger.log('Serial port ready.')

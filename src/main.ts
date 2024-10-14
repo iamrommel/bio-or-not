@@ -1,5 +1,4 @@
 import 'dotenv/config'
-
 import { Arduino } from './arduino'
 import { TeachableMachine } from './teachable-machine'
 import { delay } from './delay'
@@ -21,6 +20,10 @@ class MainApp {
     this.arduino = new Arduino()
     this.teachableMachine = new TeachableMachine()
     this.camera = new Camera()
+
+    this.arduino.initializeWhenNotReady()
+    await this.teachableMachine.initializeWhenNoReady()
+    this.camera.initializeWhenNotReady()
   }
 
   // Predict if the image is biodegradable or non-biodegradable

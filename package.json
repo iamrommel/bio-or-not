@@ -7,7 +7,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "tsx src/main.ts",
+    "dev": "tsx  src/main.ts ",
     "lint": "eslint . --ext .ts"
   },
   "devDependencies": {

@@ -2,13 +2,14 @@ import { LayersModel } from '@tensorflow/tfjs-node'
 import { Logger } from './logger'
 import fs from 'fs'
 import * as tf from '@tensorflow/tfjs-node'
+import * as process from 'node:process'
 
 export class TeachableMachine {
   config: { tmModelUrl: string }
   private logger: Logger = null
   public model: LayersModel = null
 
-  constructor(tmModelUrl?: string) {
+  constructor() {
     this.config = {
       tmModelUrl: process.env.TM_MODEL_URL ?? 'https://teachablemachine.withgoogle.com/models/MKmC1_adY/',
     }
@@ -21,7 +22,7 @@ export class TeachableMachine {
     }
 
     if (!this.model) {
-      this.logger.log('Start loading AI model.')
+      this.logger.log('Start loading AI model.', this.config)
 
       const modelURL = `${this.config.tmModelUrl}model.json`
       this.model = await tf.loadLayersModel(modelURL) // Load the graph model
