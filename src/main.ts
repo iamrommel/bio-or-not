@@ -52,7 +52,7 @@ class MainApp {
           this.arduino.sendCommand('R')
         }
 
-        await delay(3000)
+        await delay(4000)
 
         //we need to capture again for the previous image, it might contain the table only
         //we need to consider also the timing of the servo
