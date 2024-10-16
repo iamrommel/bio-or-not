@@ -24,6 +24,9 @@ class MainApp {
     this.arduino.initializeWhenNotReady()
     await this.teachableMachine.initializeWhenNoReady()
     this.camera.initializeWhenNotReady()
+
+    //get the list of camera
+    this.camera.getAllCameras()
   }
 
   // Predict if the image is biodegradable or non-biodegradable
