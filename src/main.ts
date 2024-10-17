@@ -34,6 +34,8 @@ class MainApp {
   async main() {
     await this.initializeAll()
 
+    this.logger.log('Everything is now ready.')
+
     // Capture the first frame as the initial "previous" image
     await this.camera.capture(this.previousImage)
 
